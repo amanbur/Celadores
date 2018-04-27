@@ -17,6 +17,8 @@
  * under the License.
  */
 var app = {
+
+
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -66,6 +68,7 @@ var app = {
                 informDiv.innerHTML += " registraId";
                 localStorage.setItem('registrationId', data.registrationId);
                 // Post registrationId to your app server as the value has changed
+
             }
             informDiv.innerHTML += " despues de registro";
             var parentElement = document.getElementById('registration');
@@ -76,6 +79,8 @@ var app = {
             receivedElement.setAttribute('style', 'display:block;');
             listeningElement.innerHTML+=data.registrationId;
             receivedElement.innerHTML+=data.registrationId;
+
+            document.getElementById('requestID').value = data.registrationId;
         });
 
         push.on('error', function(e) {

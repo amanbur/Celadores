@@ -35,9 +35,13 @@ var app = {
     onDeviceReady: function() {
         console.log('Received Device Ready Event');
         console.log('calling setup push');
+        var informDiv = document.getElementById('informacion');
+        informDiv.innerHTML = "Entra en ready";
         app.setupPush();
     },
     setupPush: function() {
+        var informDiv = document.getElementById('informacion');
+        informDiv.innerHTML += " Entra en setPush";
         console.log('calling push init');
         var push = PushNotification.init({
             "android": {
@@ -52,24 +56,26 @@ var app = {
             "windows": {}
         });
         console.log('after init');
-
+        informDiv.innerHTML += " despues init";
         push.on('registration', function(data) {
             console.log('registration event: ' + data.registrationId);
-
+            informDiv.innerHTML += " Entra en registro";
             var oldRegId = localStorage.getItem('registrationId');
             if (oldRegId !== data.registrationId) {
                 // Save new registration ID
+                informDiv.innerHTML += " registraId";
                 localStorage.setItem('registrationId', data.registrationId);
                 // Post registrationId to your app server as the value has changed
             }
-
+            informDiv.innerHTML += " despues de registro";
             var parentElement = document.getElementById('registration');
             var listeningElement = parentElement.querySelector('.waiting');
             var receivedElement = parentElement.querySelector('.received');
 
             listeningElement.setAttribute('style', 'display:none;');
             receivedElement.setAttribute('style', 'display:block;');
-            receivedElement.innerHTML=data.registrationId;
+            listeningElement.innerHTML+=data.registrationId;
+            receivedElement.innerHTML+=data.registrationId;
         });
 
         push.on('error', function(e) {

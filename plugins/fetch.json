@@ -14,7 +14,7 @@
         },
         "is_top_level": true,
         "variables": {
-            "SENDER_ID": "834039558449"
+            "SENDER_ID": "XXXXXXX"
         }
     },
     "cordova-plugin-console": {
